@@ -1,0 +1,15 @@
+##
+# call-linter.yaml
+# Calls remote workflow to run static code analysis.
+##
+---
+name: Linting
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  call-common:
+    name: Call Linter
+    uses: sosadtsia/workflow-templates/.github/workflows/linter.yaml@main
+    secrets: inherit
