@@ -20,7 +20,6 @@ def build_group_paths(rows):
                 'name': group_name,
                 'parent': group_parent
             }
-            print(f"Processing group: ID={group_id}, Name={group_name}, Parent={group_parent}")  # Debug group processing
 
     # Second pass: build full paths
     def get_path(gid):
@@ -65,11 +64,9 @@ def main():
         group_id = row.get('!group_id')
         group_name = row.get('!group_name')
         group_parent = row.get('!group_parent')
-        print(f"Processing group: ID={group_id}, Name={group_name}, Parent={group_parent}")  # Debug group processing
 
     # Build group paths
     group_paths, id_to_group = build_group_paths(rows)  # Unpack returned values
-    print("Group Paths:", group_paths)  # Debug group paths
 
     # Create database
     try:
@@ -99,7 +96,6 @@ def main():
             print(f"Entry '{title}' already exists in group '{group_path}'. Skipping.")
             continue
 
-        print(f"Adding entry: {title}, {username}, {password}, {url}, {notes} to group {group_path}")  # Debug entry addition
         kp.add_entry(group, title=title, username=username, password=password, url=url, notes=notes)
 
     kp.save()
