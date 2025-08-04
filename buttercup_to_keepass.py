@@ -56,9 +56,6 @@ def main():
         reader = csv.DictReader(f, delimiter=',')  # Use comma as delimiter
         rows = list(reader)
 
-    # Debugging CSV reading
-    print("CSV Headers:", reader.fieldnames)  # Print CSV headers
-
     # Debugging group processing
     for row in rows:
         group_id = row.get('!group_id')
@@ -84,6 +81,11 @@ def main():
         password = row.get('password', '')
         url = row.get('URL', '')
         notes = row.get('Notes', '')
+
+        # Append non-empty custom fields to notes
+        for key, value in row.items():
+            if key not in ('title', 'username', 'password', 'URL', 'Notes', '!type', '!group_id', '!group_name', '!group_parent') and value:
+                notes += f"\n{key}: {value}"
 
         group_id = row.get('!group_id', '')
         group_path = group_paths.get(group_id, 'General')
